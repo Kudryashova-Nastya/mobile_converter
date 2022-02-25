@@ -2,8 +2,9 @@ package com.example.myapplication.data
 
 
 data class CurrencyResponse(
-    val sucess: Boolean,
+    val success: Boolean,
     val timestamp: Long,
+    val base: String,
     val date: String,
     val rates: Map<String, Double>
 )

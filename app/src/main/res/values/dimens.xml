@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size">24sp</dimen>
+    <dimen name="main_margin">5dp</dimen>
+    <dimen name="margin_horizont">8dp</dimen>
+    <dimen name="margin_max">32dp</dimen>
+    <dimen name="margin_mid">16dp</dimen>
+    <dimen name="text_q">24sp</dimen>
+    <dimen name="text_but">14sp</dimen>
+    <dimen name="margin_add">20dp</dimen>
+    <dimen name="height_but">46dp</dimen>
+    <dimen name="margin_plus">24dp</dimen>
+    <dimen name="text_rel">18sp</dimen>
+</resources>
