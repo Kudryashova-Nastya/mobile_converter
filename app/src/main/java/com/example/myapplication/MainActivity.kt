@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                     .commitNow()
         }
         val interceptor = HttpLoggingInterceptor()
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
         val retrofit = Retrofit.Builder()
@@ -36,9 +36,14 @@ class MainActivity : AppCompatActivity() {
         val service = retrofit.create(CurrencyApi::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
-            val currencies = service.getCurrency()
-//            print(currencies)
+            try {
+                val currencies = service.getCurrency()
             Log.d("MY_TAG", "$currencies")
+            } catch (e: Exception){
+                e.printStackTrace()
+                Log.d("MY_TAG", e.localizedMessage)
+            }
+//            print(currencies)
         }
     }
 }
