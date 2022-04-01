@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Обменник валют</string>
+    <string name="currency_example">RUB</string>
+    <string name="makefavorite">MakeFavorite</string>
 </resources>

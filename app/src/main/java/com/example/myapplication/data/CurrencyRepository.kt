@@ -6,6 +6,6 @@ interface CurrencyRepository {
 
     suspend fun getAll(): LiveData<List<CurrencyDb?>>
 
-    suspend fun createCurrency(addNewCurrency: CurrencyDb)
+//    suspend fun createCurrency(addNewCurrency: CurrencyDb)
 
 }

@@ -11,4 +11,6 @@
     <dimen name="height_but">46dp</dimen>
     <dimen name="margin_plus">24dp</dimen>
     <dimen name="text_rel">18sp</dimen>
+    <dimen name="item_width">355dp</dimen>
+    <dimen name="main_margin_vertical">32dp</dimen>
 </resources>

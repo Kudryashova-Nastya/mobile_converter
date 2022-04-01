@@ -12,15 +12,15 @@ class RoomCurrencyRepository(
         return nodesDao.getAll()
     }
 
-    override suspend fun createCurrency(newCurrency: CurrencyDb) {
-        try {
-            val entity = newCurrency
-            nodesDao.createCurrency(entity)
-        } catch (e: SQLiteConstraintException) {
-            val appException = RuntimeException()
-            appException.initCause(e)
-            throw appException
-        }
-    }
+//    override suspend fun createCurrency(newCurrency: CurrencyDb) {
+//        try {
+//            val entity = newCurrency
+//            nodesDao.createCurrency(entity)
+//        } catch (e: SQLiteConstraintException) {
+//            val appException = RuntimeException()
+//            appException.initCause(e)
+//            throw appException
+//        }
+//    }
 
 }

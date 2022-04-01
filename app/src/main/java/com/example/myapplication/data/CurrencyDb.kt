@@ -3,7 +3,6 @@ package com.example.myapplication.data
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
@@ -13,8 +12,8 @@ import kotlinx.android.parcel.Parcelize
 )
 data class CurrencyDb(
     @PrimaryKey(autoGenerate = true) val id: Long,
-    @ColumnInfo(name = "success") val success: Boolean,
-    @ColumnInfo(name = "timestamp") val timestamp: Long,
+//    @ColumnInfo(name = "success") val success: Boolean,
+//    @ColumnInfo(name = "timestamp") val timestamp: Long,
     @ColumnInfo(name = "base") val base: String,
     @ColumnInfo(name = "date") val date: String
 //    @ColumnInfo(name = "rates") val rates: Map<String, Double>

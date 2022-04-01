@@ -20,9 +20,9 @@ class CurrencyViewModel(application: Application) : AndroidViewModel(application
     }
 
 
-    fun addCurrency(node: CurrencyDb) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.createCurrency(node)
-        }
-    }
+//    fun addCurrency(node: CurrencyDb) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            repository.createCurrency(node)
+//        }
+//    }
 }
