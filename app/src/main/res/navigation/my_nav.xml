@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.myapplication.fragments.list.ListFragment"
+        android:label="Выбор валюты"
+        tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.myapplication.fragments.HistoryFragment"
+        android:label="История операций"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/analyticsFragment"
+        android:name="com.example.myapplication.fragments.AnalyticsFragment"
+        android:label="Аналитика"
+        tools:layout="@layout/fragment_analytics" />
+</navigation>
