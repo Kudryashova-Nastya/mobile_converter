@@ -46,19 +46,19 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        GlobalScope.launch(Dispatchers.IO) {
-            try {
-                val currencies = DependencyInjection.repository.getCurrencies()
-                Log.d("MY_TAG", "$currencies")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.d("MY_TAG", e.localizedMessage)
-            }
-        }
+//        GlobalScope.launch(Dispatchers.IO) {
+//            try {
+//                val currencies = DependencyInjection.repository.getCurrencies()
+//                Log.d("MY_TAG", "$currencies")
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                Log.d("MY_TAG", e.localizedMessage)
+//            }
+//        }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.fragment)
-        return navController.navigateUp() || super.onSupportNavigateUp()
-    }
+//    override fun onSupportNavigateUp(): Boolean {
+//        val navController = findNavController(R.id.fragment)
+//        return navController.navigateUp() || super.onSupportNavigateUp()
+//    }
 }

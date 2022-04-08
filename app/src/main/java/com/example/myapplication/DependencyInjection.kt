@@ -19,9 +19,9 @@ object DependencyInjection {
         .client(client)
         .baseUrl("http://data.fixer.io/")
         .addConverterFactory(GsonConverterFactory.create())
-        .build();
+        .build()
 
-    private val service = retrofit.create(CurrencyApi::class.java)
+    private val service: CurrencyApi = retrofit.create(CurrencyApi::class.java)
 
     private val localDataSource = LocalDataSource()
     private val remoteDataSource = RemoteDataSource(service)

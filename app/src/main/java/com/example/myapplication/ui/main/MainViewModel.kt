@@ -9,13 +9,14 @@ import com.example.myapplication.ui.mapper.CurrencyUiModelMapper
 import com.example.myapplication.ui.model.CurrenciesUiModel
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: Repository) : ViewModel() {
+class MainViewModel(private val repository: Repository) : ViewModel() { // надстройка с бизнеслогикой
+
     val liveData = MutableLiveData<CurrenciesUiModel>()
 
     fun init() {
         viewModelScope.launch {
             repository.getCurrencies()?.let {
-                    liveData.postValue(CurrencyUiModelMapper.mapDomainModelToUiModel(it))
+                liveData.postValue(CurrencyUiModelMapper.mapDomainModelToUiModel(it)) // возвращает
             }
         }
     }
