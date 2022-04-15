@@ -1,7 +1,6 @@
 package com.example.myapplication.fragments.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,15 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.DependencyInjection
-import com.example.myapplication.fragments.list.ListAdapter
-import com.example.myapplication.R
-import com.example.myapplication.data.CurrencyDb
-import com.example.myapplication.data.CurrencyViewModel
 import com.example.myapplication.databinding.FragmentListBinding
-import com.example.myapplication.domain.model.Currency
 import com.example.myapplication.ui.main.MainViewModel
 import com.example.myapplication.ui.main.MainViewModelFactory
-import kotlinx.android.synthetic.main.fragment_list.view.*
 
 
 class ListFragment : Fragment() {
@@ -40,10 +33,6 @@ class ListFragment : Fragment() {
 
         adapter = ListAdapter()
 
-//        viewModel.liveData.observe(viewLifecycleOwner) { response ->
-//            Log.d("MY_TAG", response.currencyList.toString())
-//        }
-
     }
 
     override fun onCreateView(
@@ -59,11 +48,6 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        val view = inflater.inflate(R.layout.fragment_list, container, false)
-//        val recyclerView = view.recyclerview
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 //        mCurrencyViewModel = ViewModelProvider(this)[CurrencyViewModel::class.java]
 //        mCurrencyViewModel = ViewModelProvider(this)[MainViewModel::class.java]
@@ -82,12 +66,5 @@ class ListFragment : Fragment() {
             binding.recyclerview.adapter = adapter
         }
 
-//        viewModel.liveData.observe(
-//            viewLifecycleOwner
-//        ) { currency ->
-//            adapter.setData(currency as List<Currency>)
-//        }
-
-//        return view
     }
 }

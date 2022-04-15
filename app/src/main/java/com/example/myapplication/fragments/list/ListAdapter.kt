@@ -2,30 +2,36 @@ package com.example.myapplication.fragments.list
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.data.CurrencyDb
+import com.example.myapplication.databinding.CurrencyBinding
 import com.example.myapplication.domain.model.Currency
 import kotlinx.android.synthetic.main.currency.view.*
 
 class ListAdapter() :
     RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-
-    //    private var currencyList = emptyList<CurrencyDb>()
+//    private var currencyList = emptyList<CurrencyDb>()
 //    var currencyList: MutableList<Currency> = emptyList<Currency>().toMutableList()
-    var currencyList: List<Currency> = emptyList<Currency>()
+    private var currencyList: List<Currency> = emptyList()
+    private lateinit var itemBinding: CurrencyBinding
 
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//
+//        binding = CurrencyBinding.inflate(inflater, container, false)
+//        return binding.root
+//
+//    }
 
-    class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-
-        return MyViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.currency, parent, false)
-        )
+        itemBinding = CurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MyViewHolder(itemBinding)
     }
 
     override fun getItemCount(): Int {
@@ -33,17 +39,43 @@ class ListAdapter() :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        Log.d("currencyList", currencyList.toString())
-        val currentItem = currencyList[position]
-
-        holder.itemView.textCurrency.text = currentItem.name
-        holder.itemView.photoImageView.setImageResource(R.drawable.ic_star)
-
+        holder.bind(currencyList[position])
     }
+
 
     fun setData(cur: List<Currency>) {
         this.currencyList = cur
         notifyDataSetChanged()
+    }
+
+
+    class MyViewHolder(val binding: CurrencyBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(currency: Currency) {
+            Log.d("inside bind in view holder", currency.toString())
+
+            binding.textCurrency.text = currency.name
+
+            if (currency.is_favorite) {
+                binding.starImageView.setImageResource(R.drawable.ic_star_ok)
+                binding.starImageView.setOnClickListener {
+//                Toast.makeText(this, "Тык по звёздочке", Toast.LENGTH_SHORT).show()
+                    Log.d("MY_STAR", "Тык по закрашенной звёздочке")
+                    binding.starImageView.setImageResource(R.drawable.ic_star)
+                }
+            } else {
+                binding.starImageView.setImageResource(R.drawable.ic_star)
+                binding.starImageView.setOnClickListener {
+//                Toast.makeText(this, "Тык по звёздочке", Toast.LENGTH_SHORT).show()
+                    Log.d("MY_STAR", "Тык по звёздочке")
+                    binding.starImageView.setImageResource(R.drawable.ic_star_ok)
+//                    notifyDataSetChanged()
+
+                }
+            }
+
+        }
+
     }
 
 }

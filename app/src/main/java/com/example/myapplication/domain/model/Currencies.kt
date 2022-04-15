@@ -11,5 +11,6 @@ data class Currencies(
 data class Currency(
 //    val id: Int,
     val name: String,
-    val value: Double
+    val value: Double,
+    val is_favorite: Boolean = false // сортировка в репозитории
 )
