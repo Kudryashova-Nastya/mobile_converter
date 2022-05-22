@@ -1,11 +1,16 @@
 package com.example.myapplication.data
 
 import androidx.lifecycle.LiveData
+import com.example.myapplication.domain.model.Currency
 
 interface CurrencyRepository {
 
-    suspend fun getAll(): LiveData<List<CurrencyDb?>>
+    suspend fun getAll(): List<Currency>
 
-//    suspend fun createCurrency(addNewCurrency: CurrencyDb)
+    suspend fun createCurrencyItem(currency: Currency)
+
+    suspend fun updateListFavoriteCurrency(currency: Currency)
+
+    suspend fun updateListCurrency(currency: Currency)
 
 }

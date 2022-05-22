@@ -9,9 +9,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity(
-    tableName = "Currency"
+    tableName = "CurrencyInfo"
 )
-data class CurrencyDb(
+data class CurrencyInfoDb(
     @PrimaryKey(autoGenerate = true) val id: Long,
 //    @ColumnInfo(name = "success") val success: Boolean,
 //    @ColumnInfo(name = "timestamp") val timestamp: Long,
@@ -31,19 +31,19 @@ data class CurrencyDb(
 @Parcelize
 @Entity(
     tableName = "CurrencyItem",
-    foreignKeys = [
-        ForeignKey(
-            entity = CurrencyDb::class,
-            parentColumns = ["id"],
-            childColumns = ["currencyInfo"],
-            onDelete = ForeignKey.CASCADE,
-            onUpdate = ForeignKey.CASCADE
-        )
-    ]
+//    foreignKeys = [
+//        ForeignKey(
+//            entity = CurrencyInfoDb::class,
+//            parentColumns = ["id"],
+//            childColumns = ["currencyInfo"],
+//            onDelete = ForeignKey.CASCADE,
+//            onUpdate = ForeignKey.CASCADE
+//        )
+//    ]
 )
 data class CurrencyItemDb(
     @PrimaryKey(autoGenerate = true) val id: Long,
-    @ColumnInfo(name = "currencyInfo") val currencyInfo: Long,
+//    @ColumnInfo(name = "currencyInfo") val currencyInfo: Long,
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "value") val value: Double,
     @ColumnInfo(name = "is_favorite", defaultValue = "false") val is_favorite: Boolean
