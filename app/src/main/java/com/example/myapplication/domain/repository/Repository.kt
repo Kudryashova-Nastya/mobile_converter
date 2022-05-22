@@ -1,13 +1,14 @@
 package com.example.myapplication.domain.repository
 
 import android.util.Log
+import com.example.myapplication.data.RoomCurrencyRepository
 import com.example.myapplication.data_source.LocalDataSource
 import com.example.myapplication.data_source.RemoteDataSource
 import com.example.myapplication.domain.mapper.CurrencyDtoMapper
 import com.example.myapplication.domain.model.Currencies
 
 class Repository(
-    private val localDataSource: LocalDataSource,
+    private val localDataSource: RoomCurrencyRepository,
     private val remoteDataSource: RemoteDataSource
 ) {
     suspend fun getCurrencies(): Currencies? {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class CurrencyViewModel(application: Application) : AndroidViewModel(application) {
     val readAllData: LiveData<List<CurrencyDb?>>
-    private val repository: RoomCurrencyRepository
+    val repository: RoomCurrencyRepository
 
     init {
         val nodesDAO = AppDatabase.getDatabase(application).getCurrencyDao()
