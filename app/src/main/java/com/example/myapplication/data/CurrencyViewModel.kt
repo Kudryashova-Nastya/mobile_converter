@@ -9,20 +9,20 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CurrencyViewModel(application: Application) : AndroidViewModel(application) {
-    val readAllData: LiveData<List<CurrencyDb?>>
-    val repository: RoomCurrencyRepository
-
-    init {
-        val nodesDAO = AppDatabase.getDatabase(application).getCurrencyDao()
-        repository = RoomCurrencyRepository(nodesDAO)
-        readAllData = nodesDAO.getAll()
-    }
-
-
-//    fun addCurrency(node: CurrencyDb) {
-//        viewModelScope.launch(Dispatchers.IO) {
-//            repository.createCurrency(node)
-//        }
+//class CurrencyViewModel(application: Application) : AndroidViewModel(application) {
+//    val readAllData: LiveData<List<CurrencyDb?>>
+//    val repository: RoomCurrencyRepository
+//
+//    init {
+//        val nodesDAO = AppDatabase.getDatabase(application).getCurrencyDao()
+//        repository = RoomCurrencyRepository(nodesDAO)
+//        readAllData = nodesDAO.getAll()
 //    }
-}
+//
+//
+////    fun addCurrency(node: CurrencyDb) {
+////        viewModelScope.launch(Dispatchers.IO) {
+////            repository.createCurrency(node)
+////        }
+////    }
+//}

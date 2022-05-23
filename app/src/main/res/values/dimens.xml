@@ -12,5 +12,6 @@
     <dimen name="margin_plus">24dp</dimen>
     <dimen name="text_rel">18sp</dimen>
     <dimen name="item_width">355dp</dimen>
-    <dimen name="main_margin_vertical">32dp</dimen>
+    <dimen name="main_margin_vertical">10dp</dimen>
+    <dimen name="update_left_margin">10dp</dimen>
 </resources>

@@ -8,7 +8,7 @@ import com.example.myapplication.domain.model.Currency
 interface CurrencyDao {
 
     @Query("SELECT * FROM CurrencyItem")
-    fun getAll(): List<Currency>
+    suspend fun getAll(): List<Currency>
 
     @Insert(entity = CurrencyItemDb::class, onConflict = OnConflictStrategy.IGNORE)
     suspend fun createCurrencyItem(currency: Currency)

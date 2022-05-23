@@ -11,7 +11,7 @@ class RoomCurrencyRepository(
         return currencyDao.getAll()
     }
 
-    override suspend fun createCurrencyItem(currency: Currency) {
+    override suspend fun createCurrencyItem(currency: Currency, onSuccess: () -> Unit) {
         try {
             return currencyDao.createCurrencyItem(currency)
 
@@ -22,7 +22,7 @@ class RoomCurrencyRepository(
         }
     }
 
-    override suspend fun updateListFavoriteCurrency(currency: Currency) {
+    override suspend fun updateListFavoriteCurrency(currency: Currency, onSuccess: () -> Unit) {
         try {
             return currencyDao.updateListFavoriteCurrency(currency.name, currency.is_favorite)
 
@@ -33,7 +33,7 @@ class RoomCurrencyRepository(
         }
     }
 
-    override suspend fun updateListCurrency(currency: Currency) {
+    override suspend fun updateListCurrency(currency: Currency, onSuccess: () -> Unit) {
         try {
             return currencyDao.updateListCurrency(currency.name, currency.value)
 

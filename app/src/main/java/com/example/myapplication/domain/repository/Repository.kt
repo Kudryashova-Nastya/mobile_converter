@@ -1,14 +1,12 @@
 package com.example.myapplication.domain.repository
 
 import android.util.Log
-import com.example.myapplication.data.RoomCurrencyRepository
-import com.example.myapplication.data_source.LocalDataSource
 import com.example.myapplication.data_source.RemoteDataSource
 import com.example.myapplication.domain.mapper.CurrencyDtoMapper
 import com.example.myapplication.domain.model.Currencies
 
-class Repository(
-    private val localDataSource: RoomCurrencyRepository,
+open class Repository(
+//    private val localDataSource: RoomCurrencyRepository,
     private val remoteDataSource: RemoteDataSource
 ) {
     suspend fun getCurrencies(): Currencies? {
@@ -26,7 +24,7 @@ class Repository(
                 return CurrencyDtoMapper.mapResponseToDomainModel(response)
             } catch (e: Exception) {
                 e.printStackTrace()
-                Log.d("MY_TAG", e.localizedMessage)
+                Log.d("MY_TAG", e.localizedMessage.toString())
                 return null
             }
 //        }

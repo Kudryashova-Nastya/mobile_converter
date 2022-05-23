@@ -43,8 +43,8 @@ class ListAdapter() :
     }
 
 
-    fun setData(cur: List<Currency>) {
-        this.currencyList = cur
+    fun setData(data: List<Currency>) {
+        this.currencyList = data
         notifyDataSetChanged()
     }
 
@@ -60,14 +60,14 @@ class ListAdapter() :
                 binding.starImageView.setImageResource(R.drawable.ic_star_ok)
                 binding.starImageView.setOnClickListener {
 //                Toast.makeText(this, "Тык по звёздочке", Toast.LENGTH_SHORT).show()
-                    Log.d("MY_STAR", "Тык по закрашенной звёздочке")
+                    Log.d("MY_TAG_STAR", "Тык по закрашенной звёздочке")
                     binding.starImageView.setImageResource(R.drawable.ic_star)
                 }
             } else {
                 binding.starImageView.setImageResource(R.drawable.ic_star)
                 binding.starImageView.setOnClickListener {
 //                Toast.makeText(this, "Тык по звёздочке", Toast.LENGTH_SHORT).show()
-                    Log.d("MY_STAR", "Тык по звёздочке")
+                    Log.d("MY_TAG_STAR", "Тык по звёздочке")
                     binding.starImageView.setImageResource(R.drawable.ic_star_ok)
 //                    notifyDataSetChanged()
 
