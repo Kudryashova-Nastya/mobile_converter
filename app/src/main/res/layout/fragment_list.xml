@@ -15,17 +15,22 @@
         app:layout_constraintBottom_toTopOf="@+id/recyclerview"
         app:layout_constraintEnd_toStartOf="@+id/updateList"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/updateList"
         tools:ignore="MissingConstraints" />
-    <Button
+
+    <ImageButton
         android:id="@+id/updateList"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:text="@string/update_text"
-        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/update"
         app:layout_constraintStart_toEndOf="@+id/date"
-        android:layout_marginLeft="@dimen/update_left_margin"
+        app:layout_constraintTop_toTopOf="@dimen/main_margin_vertical"
+        android:layout_marginTop="@dimen/main_margin_vertical"
+        android:paddingBottom="10dp"
         tools:ignore="MissingConstraints" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
