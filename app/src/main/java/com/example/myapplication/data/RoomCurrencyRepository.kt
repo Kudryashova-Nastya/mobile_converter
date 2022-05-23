@@ -1,6 +1,7 @@
 package com.example.myapplication.data
 
 import android.database.sqlite.SQLiteConstraintException
+import com.example.myapplication.data.room.CurrencyDao
 import com.example.myapplication.domain.model.Currency
 
 class RoomCurrencyRepository(

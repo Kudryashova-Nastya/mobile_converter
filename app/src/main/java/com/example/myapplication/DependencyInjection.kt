@@ -1,12 +1,8 @@
 package com.example.myapplication
 
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
-import com.example.myapplication.DependencyInjection.repository
-import com.example.myapplication.data.*
+import com.example.myapplication.data.retrofit.CurrencyApi
 //import com.example.myapplication.data_source.LocalDataSource
-import com.example.myapplication.data_source.RemoteDataSource
+import com.example.myapplication.data.retrofit.RemoteDataSource
 import com.example.myapplication.domain.repository.Repository
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

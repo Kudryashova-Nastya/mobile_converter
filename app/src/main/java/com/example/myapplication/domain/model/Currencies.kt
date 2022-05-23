@@ -3,7 +3,7 @@ package com.example.myapplication.domain.model
 import java.util.*
 
 data class Currencies(
-    val date: Date,
+    val date: String,
     val base: String,
     val rates: List<Currency>
 )

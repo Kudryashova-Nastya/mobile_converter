@@ -1,7 +1,7 @@
-package com.example.myapplication.data
+package com.example.myapplication.data.room
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.myapplication.data.room.CurrencyItemDb
 import com.example.myapplication.domain.model.Currency
 
 @Dao

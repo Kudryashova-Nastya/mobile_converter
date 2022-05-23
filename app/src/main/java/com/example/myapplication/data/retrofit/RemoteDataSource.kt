@@ -1,6 +1,6 @@
-package com.example.myapplication.data_source
+package com.example.myapplication.data.retrofit
 
-import com.example.myapplication.data.CurrencyApi
+import com.example.myapplication.data.retrofit.CurrencyApi
 import com.example.myapplication.data.CurrencyResponse
 
 class RemoteDataSource(private val currencyApi: CurrencyApi) {

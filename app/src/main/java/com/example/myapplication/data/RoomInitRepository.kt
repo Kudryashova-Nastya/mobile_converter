@@ -1,7 +1,8 @@
 package com.example.myapplication.data
 
-import android.app.Application
 import android.content.Context
+import com.example.myapplication.data.room.AppDatabase
+import com.example.myapplication.data.room.CurrencyDao
 
 object RoomInitRepository {
     private lateinit var repositoryRealization: RoomCurrencyRepository

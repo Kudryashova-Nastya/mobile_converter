@@ -1,7 +1,7 @@
 package com.example.myapplication.domain.repository
 
 import android.util.Log
-import com.example.myapplication.data_source.RemoteDataSource
+import com.example.myapplication.data.retrofit.RemoteDataSource
 import com.example.myapplication.domain.mapper.CurrencyDtoMapper
 import com.example.myapplication.domain.model.Currencies
 
@@ -18,6 +18,7 @@ open class Repository(
 //        if (localData.isFresh) {
 //            return localData
 //        } else {
+
             try {
                 val response = remoteDataSource.getCurrencies()
 //                localDataSource.saveCurrencies(response)
