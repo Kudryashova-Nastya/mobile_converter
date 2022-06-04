@@ -85,7 +85,7 @@ class ListFragment : Fragment() {
         if (currentListRoom.isEmpty()) {
             Log.d("MY_TAG_DB", "insert currencyes")
             viewModel.liveData.observe(viewLifecycleOwner) { it ->
-                binding.date.text = it.date.toString()
+                binding.date.text = it.date
                 val rates = it.rates
                 for (item in rates) {
                     viewModel.insertCurrency(item) {
@@ -96,7 +96,7 @@ class ListFragment : Fragment() {
         } else {
             Log.d("MY_TAG_DB", "update currencyes")
             viewModel.liveData.observe(viewLifecycleOwner) { it ->
-                binding.date.text = it.date.toString()
+                binding.date.text = it.date
                 val rates = it.rates
                 for (item in rates) {
                     viewModel.updateListCurrency(item) {
@@ -110,7 +110,7 @@ class ListFragment : Fragment() {
             Log.d("MY_TAG_DB", "button update currencyes")
             viewModel.getRetrofitCurrency()
             viewModel.liveData.observe(viewLifecycleOwner) {
-                binding.date.text = it.date.toString()
+                binding.date.text = it.date
                 val rates = it.rates
                 for (item in rates) {
                     viewModel.updateListCurrency(item) {

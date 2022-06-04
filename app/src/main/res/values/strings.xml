@@ -2,6 +2,6 @@
     <string name="app_name">Обменник валют</string>
     <string name="currency_example">RUB</string>
     <string name="makefavorite">MakeFavorite</string>
-    <string name="data_text">Дата</string>
+    <string name="data_text">Дата обнов. валют</string>
     <string name="update_text">Обновить</string>
 </resources>
