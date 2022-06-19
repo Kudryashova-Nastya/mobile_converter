@@ -28,8 +28,10 @@
         app:layout_constraintStart_toEndOf="@+id/date"
         app:layout_constraintTop_toTopOf="@dimen/main_margin_vertical"
         android:layout_marginTop="@dimen/main_margin_vertical"
-        android:paddingBottom="10dp"
-        tools:ignore="MissingConstraints" />
+        android:paddingBottom="@dimen/main_margin_vertical"
+        android:paddingTop="@dimen/main_margin_vertical"
+        tools:ignore="MissingConstraints"
+        android:contentDescription="@string/updatelist" />
 
 
     <androidx.recyclerview.widget.RecyclerView

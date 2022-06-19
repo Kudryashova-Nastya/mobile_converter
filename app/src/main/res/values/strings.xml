@@ -4,4 +4,9 @@
     <string name="makefavorite">MakeFavorite</string>
     <string name="data_text">Дата обнов. валют</string>
     <string name="update_text">Обновить</string>
+    <string name="backText">Назад</string>
+    <string name="value_example">RUB</string>
+    <string name="number_example">1000</string>
+    <string name="updatelist">updateList</string>
+    <string name="exchangeswapbutton">exchangeSwapButton</string>
 </resources>
