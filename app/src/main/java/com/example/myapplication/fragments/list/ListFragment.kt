@@ -27,15 +27,15 @@ class ListFragment : Fragment() {
     private var currencyItems: MutableList<Currency> = mutableListOf()
 
 
-    private fun getRoomCurrencyToLocalList() {
-        viewModel.getLocalCurrencyList().let { newCurrency ->
-            currencyItems.clear()
-            newCurrency.forEach { currency ->
-                currencyItems.add(currency)
-            }
-            adapter.setData(currencyItems)
-        }
-    }
+//    private fun getRoomCurrencyToLocalList() {
+//        viewModel.getLocalCurrencyList().let { newCurrency ->
+//            currencyItems.clear()
+//            newCurrency.forEach { currency ->
+//                currencyItems.add(currency)
+//            }
+//            adapter.setData(currencyItems)
+//        }
+//    }
 
     override fun onCreate(
         savedInstanceState: Bundle?
@@ -46,7 +46,21 @@ class ListFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.init() // получить данные
 
-        adapter = ListAdapter()
+        adapter = ListAdapter(
+            object: CurrencyActionListener {
+                override fun onCurrencyFavorite(currency: Currency) {
+                    viewModel.updateListFavoriteCurrency(currency){}
+                }
+
+//                override fun currencyExchange(currency: java.util.Currency) {
+//                    bundle.putSerializable("currency", currency)
+//                    fragment.arguments = bundle
+//                    parentFragmentManager.beginTransaction()
+//                        .add(R.id.container_fragment, fragment)
+//                        .commitNow()
+//                }
+            }
+        )
 
     }
 
@@ -57,13 +71,10 @@ class ListFragment : Fragment() {
     ): View {
 
         binding = FragmentListBinding.inflate(inflater, container, false)
-
         recyclerView = binding.recyclerview
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = adapter
-
         return binding.root
-
     }
 
 
@@ -79,47 +90,47 @@ class ListFragment : Fragment() {
 //            adapter.setData(currency as List<Currency>)
 //        }
 
-        // проверяем есть ли в бд данные, если нет, кладём их туда, если есть, то обновляем
-        val currentListRoom = viewModel.getLocalCurrencyList()
-        Log.d("MY_TAG_DB", currentListRoom.toString())
-        if (currentListRoom.isEmpty()) {
-            Log.d("MY_TAG_DB", "insert currencyes")
-            viewModel.liveData.observe(viewLifecycleOwner) { it ->
-                binding.date.text = it.date
-                val rates = it.rates
-                for (item in rates) {
-                    viewModel.insertCurrency(item) {
-                    }
-                }
-                getRoomCurrencyToLocalList()
-            }
-        } else {
-            Log.d("MY_TAG_DB", "update currencyes")
-            viewModel.liveData.observe(viewLifecycleOwner) { it ->
-                binding.date.text = it.date
-                val rates = it.rates
-                for (item in rates) {
-                    viewModel.updateListCurrency(item) {
-                    }
-                }
-                getRoomCurrencyToLocalList()
-            }
-        }
+//        // проверяем есть ли в бд данные, если нет, кладём их туда, если есть, то обновляем
+//        val currentListRoom = viewModel.getLocalCurrencyList()
+//        Log.d("MY_TAG_DB", currentListRoom.toString())
+//        if (currentListRoom.isEmpty()) {
+//            Log.d("MY_TAG_DB", "insert currencyes")
+//            viewModel.liveData.observe(viewLifecycleOwner) { it ->
+
+
+//                binding.date.text = it.date !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+//                val rates = it.rates
+//                for (item in rates) {
+//                    viewModel.insertCurrency(item) {
+//                    }
+//                }
+//                getRoomCurrencyToLocalList()
+//            }
+//        } else {
+//            Log.d("MY_TAG_DB", "update currencyes")
+//            viewModel.liveData.observe(viewLifecycleOwner) { it ->
+//                binding.date.text = it.date
+//                val rates = it.rates
+//                for (item in rates) {
+//                    viewModel.updateListCurrency(item) {
+//                    }
+//                }
+//                getRoomCurrencyToLocalList()
+//            }
+//        }
 
         binding.updateList.setOnClickListener {
-            Log.d("MY_TAG_DB", "button update currencyes")
+            Log.d("MY_TAG_DB", "button update currencies")
             viewModel.getRetrofitCurrency()
-            viewModel.liveData.observe(viewLifecycleOwner) {
-                binding.date.text = it.date
-                val rates = it.rates
-                for (item in rates) {
-                    viewModel.updateListCurrency(item) {
-                    }
-                }
-                getRoomCurrencyToLocalList()
-            }
         }
 
+
+        viewModel.liveData.observe(viewLifecycleOwner) {
+                list ->
+            adapter.setData(list)
+        }
 //        viewModel.liveData.observe(viewLifecycleOwner) { cur ->
 //            binding.recyclerview.layoutManager =
 //                LinearLayoutManager(context, RecyclerView.VERTICAL, false)

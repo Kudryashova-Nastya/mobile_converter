@@ -9,10 +9,10 @@ import com.example.myapplication.databinding.CurrencyBinding
 import com.example.myapplication.domain.model.Currency
 import kotlinx.android.synthetic.main.currency.view.*
 
-class ListAdapter() :
+class ListAdapter(private val actionListener: CurrencyActionListener) :
     RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-//    private var currencyList = emptyList<CurrencyDb>()
+    //    private var currencyList = emptyList<CurrencyDb>()
 //    var currencyList: MutableList<Currency> = emptyList<Currency>().toMutableList()
     private var currencyList: List<Currency> = emptyList()
     private lateinit var itemBinding: CurrencyBinding
@@ -49,28 +49,27 @@ class ListAdapter() :
     }
 
 
-    class MyViewHolder(val binding: CurrencyBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MyViewHolder(private val binding: CurrencyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(currency: Currency) {
-            Log.d("inside bind in view holder", currency.toString())
+            Log.d("MY_TAG_HOLDER", currency.toString())
 
             binding.textCurrency.text = currency.name
 
             if (currency.is_favorite) {
                 binding.starImageView.setImageResource(R.drawable.ic_star_ok)
                 binding.starImageView.setOnClickListener {
-//                Toast.makeText(this, "Тык по звёздочке", Toast.LENGTH_SHORT).show()
                     Log.d("MY_TAG_STAR", "Тык по закрашенной звёздочке")
                     binding.starImageView.setImageResource(R.drawable.ic_star)
+                    actionListener.onCurrencyFavorite(currency.copy(is_favorite = !currency.is_favorite))
                 }
             } else {
                 binding.starImageView.setImageResource(R.drawable.ic_star)
                 binding.starImageView.setOnClickListener {
-//                Toast.makeText(this, "Тык по звёздочке", Toast.LENGTH_SHORT).show()
                     Log.d("MY_TAG_STAR", "Тык по звёздочке")
                     binding.starImageView.setImageResource(R.drawable.ic_star_ok)
-//                    notifyDataSetChanged()
-
+                    actionListener.onCurrencyFavorite(currency.copy(is_favorite = !currency.is_favorite))
                 }
             }
 

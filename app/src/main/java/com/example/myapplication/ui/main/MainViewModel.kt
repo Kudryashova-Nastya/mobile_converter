@@ -14,52 +14,55 @@ import kotlinx.coroutines.runBlocking
 
 class MainViewModel(val room: RoomCurrencyRepository) : ViewModel() { // надстройка с бизнеслогикой
 
-//    val liveData = MutableLiveData<CurrenciesUiModel>()
-    val liveData = MutableLiveData<Currencies>()
+    val liveData = MutableLiveData<List<Currency>>()
 
     private val repository: Repository = DependencyInjection.repository
 
     fun init() {
         this.getRetrofitCurrency()
-
     }
 
-    fun getRetrofitCurrency(){
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.getCurrencies()?.let {
-//                liveData.postValue(CurrencyUiModelMapper.mapDomainModelToUiModel(it))
-                liveData.postValue(it)
-            }
-        }
 
-    }
-
-    fun getLocalCurrencyList(): List<Currency>{
+    private fun getLocalCurrencyList(): List<Currency>? {
         return runBlocking {
             room.getAll()
         }
     }
 
+    fun getRetrofitCurrency() {
+        viewModelScope.launch(Dispatchers.IO) {
+            liveData.postValue(getLocalCurrencyList())
+            repository.getCurrencies()?.let { remoteCurrencies ->
+                remoteCurrencies.rates.map { remoteCurrency ->
+                    updateListCurrency(remoteCurrency) {}
+                }
+                liveData.postValue(getLocalCurrencyList())
+            }
+        }
+    }
 
-    fun insertCurrency(currency: Currency, onSuccess:() -> Unit){
-        viewModelScope.launch(Dispatchers.IO){
-            room.createCurrencyItem(currency){
+
+    fun insertCurrency(currency: Currency, onSuccess: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            room.createCurrencyItem(currency) {
                 onSuccess()
             }
         }
     }
 
-    fun updateListFavoriteCurrency(currency: Currency, onSuccess:() -> Unit){
-        viewModelScope.launch(Dispatchers.IO){
-            room.updateListFavoriteCurrency(currency){
+    fun updateListFavoriteCurrency(currency: Currency, onSuccess: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            room.updateListFavoriteCurrency(currency) {
+                val newList = getLocalCurrencyList()
+                liveData.postValue(newList!!)
                 onSuccess()
             }
         }
     }
 
-    fun updateListCurrency(currency: Currency, onSuccess:() -> Unit){
-        viewModelScope.launch(Dispatchers.IO){
-            room.updateListCurrency(currency){
+    private fun updateListCurrency(currency: Currency, onSuccess: () -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            room.updateListCurrency(currency) {
                 onSuccess()
             }
         }
