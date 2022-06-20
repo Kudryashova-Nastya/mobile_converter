@@ -9,4 +9,6 @@
     <string name="number_example">1000</string>
     <string name="updatelist">updateList</string>
     <string name="exchangeswapbutton">exchangeSwapButton</string>
+    <string name="currentDateName">Проверка обнов:</string>
+    <string name="dateUpdateName">Обнов. валют:</string>
 </resources>

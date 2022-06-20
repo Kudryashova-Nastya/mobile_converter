@@ -1,8 +1,7 @@
 package com.example.myapplication.data.room
 
 import androidx.room.*
-import com.example.myapplication.data.room.CurrencyItemDb
-import com.example.myapplication.domain.model.Currency
+import com.example.myapplication.data.room.Currency
 
 @Dao
 interface CurrencyDao {
@@ -10,7 +9,7 @@ interface CurrencyDao {
     @Query("SELECT * FROM CurrencyItem")
     suspend fun getAll(): List<Currency>
 
-    @Insert(entity = CurrencyItemDb::class, onConflict = OnConflictStrategy.IGNORE)
+    @Insert(entity = Currency::class, onConflict = OnConflictStrategy.IGNORE)
     suspend fun createCurrencyItem(currency: Currency)
 
     @Query("UPDATE CurrencyItem SET is_favorite = :is_favorite WHERE name = :name")

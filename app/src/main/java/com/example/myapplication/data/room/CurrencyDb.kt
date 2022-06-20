@@ -6,6 +6,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
 
 @Parcelize
 @Entity(
@@ -28,7 +29,6 @@ data class CurrencyInfoDb(
 //    }
 }
 
-@Parcelize
 @Entity(
     tableName = "CurrencyItem",
 //    foreignKeys = [
@@ -41,18 +41,10 @@ data class CurrencyInfoDb(
 //        )
 //    ]
 )
-data class CurrencyItemDb(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+data class Currency(
+//    @PrimaryKey(autoGenerate = true) val id: Long,
 //    @ColumnInfo(name = "currencyInfo") val currencyInfo: Long,
-    @ColumnInfo(name = "name") val name: String,
+    @PrimaryKey val name: String,
     @ColumnInfo(name = "value") val value: Double,
     @ColumnInfo(name = "is_favorite", defaultValue = "false") val is_favorite: Boolean
-) : Parcelable {
-
-//    companion object {
-//        fun fromAddNewNode(addNewNode: AddNewNode): NodeDbEntity = NodeDbEntity(
-//            id = 0,
-//            value = addNewNode.value
-//        )
-//    }
-}
+) : Serializable

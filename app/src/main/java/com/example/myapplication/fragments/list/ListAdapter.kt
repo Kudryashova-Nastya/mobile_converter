@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.CurrencyBinding
-import com.example.myapplication.domain.model.Currency
+import com.example.myapplication.data.room.Currency
 import kotlinx.android.synthetic.main.currency.view.*
 
 class ListAdapter(private val actionListener: CurrencyActionListener) :
@@ -53,7 +53,7 @@ class ListAdapter(private val actionListener: CurrencyActionListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(currency: Currency) {
-            Log.d("MY_TAG_HOLDER", currency.toString())
+//            Log.d("MY_TAG_HOLDER", currency.toString())
 
             binding.textCurrency.text = currency.name
 
@@ -71,6 +71,11 @@ class ListAdapter(private val actionListener: CurrencyActionListener) :
                     binding.starImageView.setImageResource(R.drawable.ic_star_ok)
                     actionListener.onCurrencyFavorite(currency.copy(is_favorite = !currency.is_favorite))
                 }
+            }
+
+            binding.root.setOnClickListener {
+                Log.d("MY_TAG_CURRENCY", "Тык по валюте")
+                actionListener.currencyExchange(currency)
             }
 
         }

@@ -1,7 +1,7 @@
 package com.example.myapplication.data
 
 import androidx.lifecycle.LiveData
-import com.example.myapplication.domain.model.Currency
+import com.example.myapplication.data.room.Currency
 
 interface CurrencyRepository {
 
