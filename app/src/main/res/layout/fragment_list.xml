@@ -7,15 +7,47 @@
     tools:context=".fragments.list.ListFragment">
 
     <TextView
+        android:id="@+id/currentDateName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Проверка обнов:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="5dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/currentDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/data_text"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/currentDateName"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        android:layout_marginStart="@dimen/main_margin_vertical"
+        android:layout_marginTop="5dp"
+        />
+
+    <TextView
+        android:id="@+id/dateUpdateName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Обнов. валют:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/currentDateName"
+        android:layout_marginTop="5dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/data_text"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerview"
-        app:layout_constraintEnd_toStartOf="@+id/updateList"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/updateList"
+        app:layout_constraintBottom_toBottomOf="@+id/dateUpdateName"
+        app:layout_constraintStart_toEndOf="@+id/dateUpdateName"
+        android:layout_marginStart="@dimen/main_margin_vertical"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
@@ -23,15 +55,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/update"
-        app:layout_constraintStart_toEndOf="@+id/date"
-        app:layout_constraintTop_toTopOf="@dimen/main_margin_vertical"
         android:layout_marginTop="@dimen/main_margin_vertical"
-        android:paddingBottom="@dimen/main_margin_vertical"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/updatelist"
         android:paddingTop="@dimen/main_margin_vertical"
-        tools:ignore="MissingConstraints"
-        android:contentDescription="@string/updatelist" />
+        android:paddingBottom="@dimen/main_margin_vertical"
+        android:src="@drawable/update"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@dimen/main_margin_vertical"
+        tools:ignore="MissingConstraints" />
 
 
     <androidx.recyclerview.widget.RecyclerView
