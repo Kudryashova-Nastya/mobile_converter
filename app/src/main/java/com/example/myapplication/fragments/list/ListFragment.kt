@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.data.RoomInitRepository
-import com.example.myapplication.databinding.FragmentListBinding
 import com.example.myapplication.data.room.Currency
+import com.example.myapplication.databinding.FragmentListBinding
 import com.example.myapplication.fragments.exchange.ExchangeFragment
 import com.example.myapplication.ui.main.MainViewModel
 import com.example.myapplication.ui.main.MainViewModelFactory
@@ -30,7 +30,6 @@ class ListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var bundle: Bundle
     private lateinit var fragment: Fragment
-
 
 
     override fun onCreate(
@@ -56,16 +55,17 @@ class ListFragment : Fragment() {
         binding = FragmentListBinding.inflate(inflater, container, false)
 
         adapter = ListAdapter(
-            object: CurrencyActionListener {
+            object : CurrencyActionListener {
                 override fun onCurrencyFavorite(currency: Currency) {
-                    viewModel.updateListFavoriteCurrency(currency){}
+                    viewModel.updateListFavoriteCurrency(currency) {}
                 }
 
                 override fun toCurrencyExchange(currency: Currency) {
                     bundle.putSerializable("currency", currency)
                     fragment.arguments = bundle
                     // перемещение на стр обмена
-                    Navigation.findNavController(requireView()).navigate(R.id.action_listFragment_to_exchangeFragment)
+                    Navigation.findNavController(requireView())
+                        .navigate(R.id.action_listFragment_to_exchangeFragment)
                 }
             }
         )
@@ -86,8 +86,7 @@ class ListFragment : Fragment() {
         }
 
 
-        viewModel.liveData.observe(viewLifecycleOwner) {
-                list ->
+        viewModel.liveData.observe(viewLifecycleOwner) { list ->
             adapter.setData(list)
             binding.date.text = viewModel.updateDate
             binding.currentDate.text = getCurrentDate()
@@ -97,8 +96,15 @@ class ListFragment : Fragment() {
 
     @SuppressLint("SimpleDateFormat")
     private fun getCurrentDate(): String {
+
+        // текущая дата (+3 часа к той что в системе)
+        val sdf = SimpleDateFormat("dd MMMM yyyy, HH:mm:ss")
         val c = Calendar.getInstance()
-        val df = SimpleDateFormat("dd MMMM yyyy, HH:mm:ss")
-        return df.format(c.time)
+
+        c.add(
+            Calendar.HOUR,
+            3
+        )
+        return sdf.format(c.time)
     }
 }
