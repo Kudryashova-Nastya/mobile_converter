@@ -9,7 +9,11 @@
         android:id="@+id/listFragment"
         android:name="com.example.myapplication.fragments.list.ListFragment"
         android:label="Выбор валюты"
-        tools:layout="@layout/fragment_list" />
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_exchangeFragment"
+            app:destination="@id/exchangeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.myapplication.fragments.HistoryFragment"
@@ -20,4 +24,12 @@
         android:name="com.example.myapplication.fragments.AnalyticsFragment"
         android:label="Аналитика"
         tools:layout="@layout/fragment_analytics" />
+    <fragment
+        android:id="@+id/exchangeFragment"
+        android:name="com.example.myapplication.fragments.exchange.ExchangeFragment"
+        android:label="ExchangeFragment" >
+        <action
+            android:id="@+id/action_exchangeFragment_to_listFragment"
+            app:destination="@id/listFragment" />
+    </fragment>
 </navigation>

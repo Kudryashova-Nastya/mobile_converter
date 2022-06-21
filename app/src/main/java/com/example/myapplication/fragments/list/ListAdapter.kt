@@ -75,7 +75,7 @@ class ListAdapter(private val actionListener: CurrencyActionListener) :
 
             binding.root.setOnClickListener {
                 Log.d("MY_TAG_CURRENCY", "Тык по валюте")
-                actionListener.currencyExchange(currency)
+                actionListener.toCurrencyExchange(currency)
             }
 
         }

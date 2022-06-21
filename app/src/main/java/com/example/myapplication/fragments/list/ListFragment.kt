@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.data.RoomInitRepository
 import com.example.myapplication.databinding.FragmentListBinding
 import com.example.myapplication.data.room.Currency
@@ -26,6 +28,8 @@ class ListFragment : Fragment() {
     private lateinit var adapter: ListAdapter
     private lateinit var binding: FragmentListBinding
     private lateinit var recyclerView: RecyclerView
+    private lateinit var bundle: Bundle
+    private lateinit var fragment: Fragment
 
 
 
@@ -38,21 +42,8 @@ class ListFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.init() // получить данные
 
-        val fragment = ExchangeFragment()
-        val bundle = Bundle()
-        adapter = ListAdapter(
-            object: CurrencyActionListener {
-                override fun onCurrencyFavorite(currency: Currency) {
-                    viewModel.updateListFavoriteCurrency(currency){}
-                }
-
-                override fun currencyExchange(currency: Currency) {
-                    bundle.putSerializable("currency", currency)
-                    fragment.arguments = bundle
-                    // добавить перемещение
-                }
-            }
-        )
+        fragment = ExchangeFragment()
+        bundle = Bundle()
 
     }
 
@@ -63,6 +54,22 @@ class ListFragment : Fragment() {
     ): View {
 
         binding = FragmentListBinding.inflate(inflater, container, false)
+
+        adapter = ListAdapter(
+            object: CurrencyActionListener {
+                override fun onCurrencyFavorite(currency: Currency) {
+                    viewModel.updateListFavoriteCurrency(currency){}
+                }
+
+                override fun toCurrencyExchange(currency: Currency) {
+                    bundle.putSerializable("currency", currency)
+                    fragment.arguments = bundle
+                    // перемещение на стр обмена
+                    Navigation.findNavController(requireView()).navigate(R.id.action_listFragment_to_exchangeFragment)
+                }
+            }
+        )
+
         recyclerView = binding.recyclerview
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recyclerView.adapter = adapter

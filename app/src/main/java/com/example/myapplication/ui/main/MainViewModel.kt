@@ -35,7 +35,7 @@ class MainViewModel(val room: RoomCurrencyRepository) : ViewModel() { // над�
             val currentListRoom = getLocalCurrencyList()
 
             // проверяем есть ли в бд данные, если нет, кладём их туда, если есть, то обновляем
-            if (currentListRoom?.isEmpty() == true) {
+            if (currentListRoom.isEmpty()) {
                 Log.d("MY_TAG_DB", "insert currencies")
                 repository.getCurrencies()?.let { remoteCurrencies ->
                     remoteCurrencies.rates.map { remoteCurrency ->
@@ -46,7 +46,7 @@ class MainViewModel(val room: RoomCurrencyRepository) : ViewModel() { // над�
                 }
             } else {
                 Log.d("MY_TAG_DB", "update currencies")
-                liveData.postValue(currentListRoom!!)
+                liveData.postValue(currentListRoom)
                 repository.getCurrencies()?.let { remoteCurrencies ->
                     remoteCurrencies.rates.map { remoteCurrency ->
                         updateListCurrency(remoteCurrency) {}
@@ -71,7 +71,7 @@ class MainViewModel(val room: RoomCurrencyRepository) : ViewModel() { // над�
         viewModelScope.launch(Dispatchers.IO) {
             room.updateListFavoriteCurrency(currency) {
                 val newList = getLocalCurrencyList()
-                liveData.postValue(newList!!)
+                liveData.postValue(newList)
                 onSuccess()
             }
         }
