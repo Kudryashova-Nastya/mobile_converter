@@ -13,17 +13,13 @@ import com.example.myapplication.data.room.Currency
 import com.example.myapplication.databinding.FragmentExchangeBinding
 
 
-class ExchangeFragment() : Fragment() {
+class ExchangeFragment : Fragment() {
 
 
     private lateinit var binding: FragmentExchangeBinding
     private lateinit var viewModel: ExchangeViewModel
     private lateinit var currentCurrency: Currency
-    lateinit var firstCurrency: Currency
-    private lateinit var secondCurrency: Currency
-    var firstName = ""
-    var firstValue = 1.000
-    private var secondNameIs = false
+    private lateinit var exchangeCurrency: Currency
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,15 +35,15 @@ class ExchangeFragment() : Fragment() {
     ): View {
 
         binding = FragmentExchangeBinding.inflate(inflater, container, false)
-//        currentCurrency = arguments?.getSerializable("currency") as Currency
-//        firstCurrency = currentCurrency
-//        firstName = firstCurrency.name
+        if (arguments != null) {
+            currentCurrency = arguments?.getSerializable("currency") as Currency
+            binding.firstCurrencyName.text = currentCurrency.name
+        }
         binding.secondValue.text = "1"
 
         binding.buttonBack.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_exchangeFragment_to_listFragment)
         }
-//
         return binding.root
     }
 

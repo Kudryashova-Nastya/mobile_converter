@@ -62,10 +62,9 @@ class ListFragment : Fragment() {
 
                 override fun toCurrencyExchange(currency: Currency) {
                     bundle.putSerializable("currency", currency)
-                    fragment.arguments = bundle
                     // перемещение на стр обмена
                     Navigation.findNavController(requireView())
-                        .navigate(R.id.action_listFragment_to_exchangeFragment)
+                        .navigate(R.id.action_listFragment_to_exchangeFragment, bundle)
                 }
             }
         )
