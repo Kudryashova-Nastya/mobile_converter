@@ -6,7 +6,7 @@ import com.example.myapplication.data.room.Currency
 @Dao
 interface CurrencyDao {
 
-    @Query("SELECT * FROM CurrencyItem")
+    @Query("SELECT * FROM CurrencyItem ORDER BY is_favorite DESC")
     suspend fun getAll(): List<Currency>
 
     @Insert(entity = Currency::class, onConflict = OnConflictStrategy.IGNORE)
