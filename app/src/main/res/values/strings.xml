@@ -12,4 +12,5 @@
     <string name="currentDateName">Проверка обнов:</string>
     <string name="dateUpdateName">Обнов. валют:</string>
     <string name="exchange">Обменять</string>
+    <string name="eur">EUR</string>
 </resources>

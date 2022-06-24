@@ -64,27 +64,23 @@
         android:layout_marginVertical="@dimen/main_margin_vertical"
         android:text="@string/number_example"
         android:textColor="@color/black"
-        android:textSize="26sp"
-        app:layout_constraintBottom_toBottomOf="@+id/secondCurrencyName"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/secondCurrencyName"
-        android:layout_marginEnd="70dp"
-        tools:ignore="MissingConstraints"
-        android:textStyle="bold"/>
+        app:layout_constraintTop_toBottomOf="@+id/exchangeSwapButton"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/secondCurrencyName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/main_margin_vertical"
-        android:text="@string/value_example"
+        android:text="@string/eur"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/exchangeSwapButton"
-        android:layout_marginStart="70dp"
+        app:layout_constraintTop_toBottomOf="@+id/secondValue"
         tools:ignore="MissingConstraints" />
 
     <Button

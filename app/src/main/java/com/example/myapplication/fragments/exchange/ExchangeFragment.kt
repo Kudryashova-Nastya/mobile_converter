@@ -11,6 +11,7 @@ import com.example.myapplication.R
 import com.example.myapplication.data.RoomInitRepository
 import com.example.myapplication.data.room.Currency
 import com.example.myapplication.databinding.FragmentExchangeBinding
+import kotlin.math.roundToInt
 
 
 class ExchangeFragment : Fragment() {
@@ -39,7 +40,13 @@ class ExchangeFragment : Fragment() {
             currentCurrency = arguments?.getSerializable("currency") as Currency
             binding.firstCurrencyName.text = currentCurrency.name
         }
-        binding.secondValue.text = "1"
+        val currentValue = 1 / currentCurrency.value
+        // округляем до 5 знаков после запятой
+        binding.secondValue.text = ((currentValue * 100000.0).roundToInt() / 100000.0).toString()
+        if (binding.valueInput.text?.isEmpty() == true) {
+            binding.valueInput.setText("1")
+        }
+
 
         binding.buttonBack.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_exchangeFragment_to_listFragment)
