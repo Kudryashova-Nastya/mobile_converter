@@ -1,6 +1,8 @@
 package com.example.myapplication.fragments.exchange
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,9 +49,24 @@ class ExchangeFragment : Fragment() {
             binding.valueInput.setText("1")
         }
 
+        binding.valueInput.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                binding.secondValue.text =
+                    (((currentValue * 100000.0).roundToInt() * binding.valueInput.text.toString()
+                        .toDouble() / 100000.0)).toString()
+            }
+        })
+
 
         binding.buttonBack.setOnClickListener {
-            Navigation.findNavController(requireView()).navigate(R.id.action_exchangeFragment_to_listFragment)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_exchangeFragment_to_listFragment)
         }
         return binding.root
     }

@@ -41,6 +41,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstCurrencyName"
         android:layout_marginVertical="@dimen/main_margin_vertical"
+        android:inputType="number"
         tools:ignore="MissingConstraints" />
 
     <ImageButton
