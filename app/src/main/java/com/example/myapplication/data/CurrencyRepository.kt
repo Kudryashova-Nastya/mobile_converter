@@ -1,6 +1,5 @@
 package com.example.myapplication.data
 
-import androidx.lifecycle.LiveData
 import com.example.myapplication.data.room.Currency
 
 interface CurrencyRepository {
@@ -12,5 +11,9 @@ interface CurrencyRepository {
     suspend fun updateListFavoriteCurrency(currency: Currency, onSuccess: () -> Unit)
 
     suspend fun updateListCurrency(currency: Currency, onSuccess: () -> Unit)
+
+    suspend fun getFavoriteCurrencyList(): List<Currency>?
+
+    suspend fun getRUB(): Currency
 
 }

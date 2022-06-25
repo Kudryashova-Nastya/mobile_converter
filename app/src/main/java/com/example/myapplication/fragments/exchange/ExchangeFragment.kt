@@ -3,6 +3,7 @@ package com.example.myapplication.fragments.exchange
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,7 @@ class ExchangeFragment : Fragment() {
     private lateinit var binding: FragmentExchangeBinding
     private lateinit var viewModel: ExchangeViewModel
     private lateinit var currentCurrency: Currency
-    private lateinit var exchangeCurrency: Currency
+    private var exchangeCurrency: Currency = Currency(name = "EUR", value = 1.0, is_favorite = false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +43,6 @@ class ExchangeFragment : Fragment() {
             currentCurrency = arguments?.getSerializable("currency") as Currency
             binding.firstCurrencyName.text = currentCurrency.name
         }
-        val currentValue = 1 / currentCurrency.value
-        // округляем до 5 знаков после запятой
-        binding.secondValue.text = ((currentValue * 100000.0).roundToInt() / 100000.0).toString()
         if (binding.valueInput.text?.isEmpty() == true) {
             binding.valueInput.setText("1")
         }
@@ -57,12 +55,12 @@ class ExchangeFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable) {
-                binding.secondValue.text =
-                    (((currentValue * 100000.0).roundToInt() * binding.valueInput.text.toString()
-                        .toDouble() / 100000.0)).toString()
+                calculateExchangeValue(
+                    exchangeCurrency, binding.valueInput.text.toString()
+                        .toDouble()
+                )
             }
         })
-
 
         binding.buttonBack.setOnClickListener {
             Navigation.findNavController(requireView())
@@ -71,14 +69,49 @@ class ExchangeFragment : Fragment() {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var secondName = ""
-        var secondValue = 1.0000
-        var num1 = 1.0000
-        var valueSecondCurrency = 1.0000
+        var exchangeCurrencyFound = false
+
+        // Если валюта для обмена ещё не определена
+        if (!exchangeCurrencyFound && viewModel.getFavoriteCurrencyList()?.size!! > 0) {
+            // ищем среди любимых первую несовпадающую с текущей валюту
+            viewModel.getFavoriteCurrencyList().let { favoriteCurrencyList ->
+                favoriteCurrencyList?.forEach { favoriteCurrency ->
+                    if (!exchangeCurrencyFound && favoriteCurrency.name !== currentCurrency.name) {
+                            exchangeCurrency = favoriteCurrency
+                            exchangeCurrencyFound = true
+                            Log.d("MY_TAG_INFO", favoriteCurrency.name + currentCurrency.name)
+                    }
+                }
+            }
+        }
+
+        // если среди любимых нет подходящей валюты, делаем проверку на рубль
+        if (!exchangeCurrencyFound && currentCurrency.name !== "RUB") {
+            exchangeCurrency = viewModel.getRUB()
+        }
+
+        // если текущая валюта и есть рубль, берём дефолтную EUR
+        calculateExchangeValue(exchangeCurrency, 1.0)
 
     }
 
+
+    private fun calculateExchangeValue(exchangeCur: Currency, inputValue: Double) {
+        val conversionOneValue = exchangeCur.value / currentCurrency.value
+        try {
+            binding.secondCurrencyName.text = exchangeCur.name
+            // округляем до 5 знаков после запятой
+            binding.secondValue.text =
+                (((conversionOneValue * 100000.0).roundToInt() * inputValue / 100000.0)).toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d("MY_TAG_ERROR", e.localizedMessage)
+            binding.secondValue.text = "0"
+        }
+    }
 }
+

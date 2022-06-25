@@ -45,15 +45,24 @@ class RoomCurrencyRepository(
         }
     }
 
-//    override suspend fun createCurrency(newCurrency: CurrencyDb) {
-//        try {
-//            val entity = newCurrency
-//            nodesDao.createCurrency(entity)
-//        } catch (e: SQLiteConstraintException) {
-//            val appException = RuntimeException()
-//            appException.initCause(e)
-//            throw appException
-//        }
-//    }
+    override suspend fun getFavoriteCurrencyList(): List<Currency>? {
+        try {
+            return currencyDao.getFavoriteCurrencyList()
+        } catch (e: SQLiteConstraintException) {
+            val appException = RuntimeException()
+            appException.initCause(e)
+            throw appException
+        }
+    }
+
+    override suspend fun getRUB(): Currency {
+        try {
+            return currencyDao.getRUB()
+        } catch (e: SQLiteConstraintException) {
+            val appException = RuntimeException()
+            appException.initCause(e)
+            throw appException
+        }
+    }
 
 }
