@@ -80,17 +80,16 @@ class ExchangeFragment : Fragment() {
             // ищем среди любимых первую несовпадающую с текущей валюту
             viewModel.getFavoriteCurrencyList().let { favoriteCurrencyList ->
                 favoriteCurrencyList?.forEach { favoriteCurrency ->
-                    if (!exchangeCurrencyFound && favoriteCurrency.name !== currentCurrency.name) {
+                    if (!exchangeCurrencyFound && favoriteCurrency.name != currentCurrency.name) {
                             exchangeCurrency = favoriteCurrency
                             exchangeCurrencyFound = true
-                            Log.d("MY_TAG_INFO", favoriteCurrency.name + currentCurrency.name)
                     }
                 }
             }
         }
 
         // если среди любимых нет подходящей валюты, делаем проверку на рубль
-        if (!exchangeCurrencyFound && currentCurrency.name !== "RUB") {
+        if (!exchangeCurrencyFound && currentCurrency.name != "RUB") {
             exchangeCurrency = viewModel.getRUB()
         }
 
