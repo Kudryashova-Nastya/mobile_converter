@@ -57,7 +57,6 @@ class ExchangeFragment : Fragment() {
             override fun afterTextChanged(s: Editable) {
                 calculateExchangeValue(
                     exchangeCurrency, binding.valueInput.text.toString()
-                        .toDouble()
                 )
             }
         })
@@ -94,18 +93,18 @@ class ExchangeFragment : Fragment() {
         }
 
         // если текущая валюта и есть рубль, берём дефолтную EUR
-        calculateExchangeValue(exchangeCurrency, 1.0)
+        calculateExchangeValue(exchangeCurrency, "1.0")
 
     }
 
 
-    private fun calculateExchangeValue(exchangeCur: Currency, inputValue: Double) {
+    private fun calculateExchangeValue(exchangeCur: Currency, inputValue: String) {
         val conversionOneValue = exchangeCur.value / currentCurrency.value
         try {
             binding.secondCurrencyName.text = exchangeCur.name
             // округляем до 5 знаков после запятой
             binding.secondValue.text =
-                (((conversionOneValue * 100000.0).roundToInt() * inputValue / 100000.0)).toString()
+                (((conversionOneValue * 100000.0).roundToInt() * inputValue.toDouble() / 100000.0)).toString()
         } catch (e: Exception) {
             e.printStackTrace()
             Log.d("MY_TAG_ERROR", e.localizedMessage)
