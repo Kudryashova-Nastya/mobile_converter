@@ -4,10 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.myapplication.data.room.CurrencyInfoDb
 import com.example.myapplication.data.room.Currency
 
-@Database(entities = [CurrencyInfoDb::class, Currency::class], version = 5)
+@Database(entities = [History::class, Currency::class], version = 6)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getCurrencyDao(): CurrencyDao
 

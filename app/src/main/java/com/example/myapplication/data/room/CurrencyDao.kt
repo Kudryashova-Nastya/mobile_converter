@@ -24,4 +24,7 @@ interface CurrencyDao {
     @Query("SELECT * FROM CurrencyItem WHERE name='RUB'")
     suspend fun getRUB(): Currency
 
+    @Query("SELECT * FROM History")
+    suspend fun getHistory(): List<History>
+
 }

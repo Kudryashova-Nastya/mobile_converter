@@ -1,6 +1,7 @@
 package com.example.myapplication.data
 
 import com.example.myapplication.data.room.Currency
+import com.example.myapplication.data.room.History
 
 interface CurrencyRepository {
 
@@ -15,5 +16,7 @@ interface CurrencyRepository {
     suspend fun getFavoriteCurrencyList(): List<Currency>?
 
     suspend fun getRUB(): Currency
+
+    suspend fun getHistory(): List<History>?
 
 }

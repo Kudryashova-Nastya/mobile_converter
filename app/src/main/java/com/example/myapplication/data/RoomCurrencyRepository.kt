@@ -3,6 +3,7 @@ package com.example.myapplication.data
 import android.database.sqlite.SQLiteConstraintException
 import com.example.myapplication.data.room.CurrencyDao
 import com.example.myapplication.data.room.Currency
+import com.example.myapplication.data.room.History
 
 class RoomCurrencyRepository(
     private val currencyDao: CurrencyDao
@@ -63,6 +64,10 @@ class RoomCurrencyRepository(
             appException.initCause(e)
             throw appException
         }
+    }
+
+    override suspend fun getHistory(): List<History> {
+        return currencyDao.getHistory()
     }
 
 }
