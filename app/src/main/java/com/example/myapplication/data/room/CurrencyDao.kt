@@ -24,7 +24,7 @@ interface CurrencyDao {
     @Query("SELECT * FROM CurrencyItem WHERE name='RUB'")
     suspend fun getRUB(): Currency
 
-    @Query("SELECT * FROM History")
+    @Query("SELECT * FROM History ORDER BY id DESC")
     suspend fun getHistory(): List<History>
 
     @Insert(entity = History::class, onConflict = OnConflictStrategy.IGNORE)

@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -72,6 +73,8 @@ class ExchangeFragment : Fragment() {
             Navigation.findNavController(requireView())
                 .navigate(R.id.action_exchangeFragment_to_listFragment)
         }
+
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
         return binding.root
     }
 

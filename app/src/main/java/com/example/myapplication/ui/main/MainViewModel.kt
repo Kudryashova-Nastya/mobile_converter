@@ -20,7 +20,7 @@ class MainViewModel(val room: RoomCurrencyRepository) : ViewModel() { // над�
     private val repository: Repository = DependencyInjection.repository
 
     fun init() {
-        this.getRetrofitCurrency()
+        getRetrofitCurrency()
     }
 
 
@@ -59,7 +59,7 @@ class MainViewModel(val room: RoomCurrencyRepository) : ViewModel() { // над�
     }
 
 
-    fun insertCurrency(currency: Currency, onSuccess: () -> Unit) {
+    private fun insertCurrency(currency: Currency, onSuccess: () -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             room.createCurrencyItem(currency) {
                 onSuccess()

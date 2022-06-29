@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/exchangeFragment"
         android:name="com.example.myapplication.fragments.exchange.ExchangeFragment"
-        android:label="ExchangeFragment" >
+        android:label="Обмен валют" >
         <action
             android:id="@+id/action_exchangeFragment_to_listFragment"
             app:destination="@id/listFragment" />

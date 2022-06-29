@@ -97,7 +97,7 @@ class ListFragment : Fragment() {
     private fun getCurrentDate(): String {
 
         // текущая дата (+3 часа к той что в системе)
-        val sdf = SimpleDateFormat("dd MMMM yyyy, HH:mm:ss")
+        val sdf = SimpleDateFormat("dd MMMM yyyy, HH:mm")
         val c = Calendar.getInstance()
 
         c.add(

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.CurrencyBinding
 import com.example.myapplication.data.room.Currency
-import kotlinx.android.synthetic.main.currency.view.*
 
 class ListAdapter(private val actionListener: CurrencyActionListener) :
     RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
