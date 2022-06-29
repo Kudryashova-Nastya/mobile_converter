@@ -67,7 +67,25 @@ class RoomCurrencyRepository(
     }
 
     override suspend fun getHistory(): List<History> {
-        return currencyDao.getHistory()
+        try {
+            return currencyDao.getHistory()
+        } catch (e: SQLiteConstraintException) {
+            val appException = RuntimeException()
+            appException.initCause(e)
+            throw appException
+        }
+    }
+
+    override suspend fun addHistory(history: History, onSuccess: () -> Unit) {
+        try {
+            currencyDao.addHistory(history)
+            onSuccess()
+        } catch (e: SQLiteConstraintException) {
+            val appException = RuntimeException()
+            appException.initCause(e)
+            throw appException
+        }
+
     }
 
 }

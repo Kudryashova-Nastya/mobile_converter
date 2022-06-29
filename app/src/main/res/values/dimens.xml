@@ -15,4 +15,5 @@
     <dimen name="main_margin_vertical">10dp</dimen>
     <dimen name="update_left_margin">16dp</dimen>
     <dimen name="textValueLeft">5dp</dimen>
+    <dimen name="history_size">18sp</dimen>
 </resources>

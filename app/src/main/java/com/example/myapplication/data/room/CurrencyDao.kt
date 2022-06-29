@@ -27,4 +27,7 @@ interface CurrencyDao {
     @Query("SELECT * FROM History")
     suspend fun getHistory(): List<History>
 
+    @Insert(entity = History::class, onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addHistory(history: History)
+
 }

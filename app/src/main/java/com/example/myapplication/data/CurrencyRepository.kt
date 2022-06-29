@@ -19,4 +19,7 @@ interface CurrencyRepository {
 
     suspend fun getHistory(): List<History>?
 
+    suspend fun addHistory(history: History, onSuccess:() -> Unit)
+
+
 }

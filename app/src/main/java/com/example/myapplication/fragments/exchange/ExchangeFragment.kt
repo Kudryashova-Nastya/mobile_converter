@@ -1,5 +1,6 @@
 package com.example.myapplication.fragments.exchange
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,7 +14,10 @@ import androidx.navigation.Navigation
 import com.example.myapplication.R
 import com.example.myapplication.data.RoomInitRepository
 import com.example.myapplication.data.room.Currency
+import com.example.myapplication.data.room.History
 import com.example.myapplication.databinding.FragmentExchangeBinding
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.math.roundToInt
 
 
@@ -23,7 +27,10 @@ class ExchangeFragment : Fragment() {
     private lateinit var binding: FragmentExchangeBinding
     private lateinit var viewModel: ExchangeViewModel
     private lateinit var currentCurrency: Currency
-    private var exchangeCurrency: Currency = Currency(name = "EUR", value = 1.0, is_favorite = false)
+    private var exchangeCurrency: Currency =
+        Currency(name = "EUR", value = 1.0, is_favorite = false)
+    private var exchangedCurrencyValue: Double? = null
+    private var inputCurrencyValue: Double = 1.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,8 +87,8 @@ class ExchangeFragment : Fragment() {
             viewModel.getFavoriteCurrencyList().let { favoriteCurrencyList ->
                 favoriteCurrencyList?.forEach { favoriteCurrency ->
                     if (!exchangeCurrencyFound && favoriteCurrency.name != currentCurrency.name) {
-                            exchangeCurrency = favoriteCurrency
-                            exchangeCurrencyFound = true
+                        exchangeCurrency = favoriteCurrency
+                        exchangeCurrencyFound = true
                     }
                 }
             }
@@ -95,6 +102,31 @@ class ExchangeFragment : Fragment() {
         // если текущая валюта и есть рубль, берём дефолтную EUR
         calculateExchangeValue(exchangeCurrency, "1.0")
 
+
+        // добавляем сохранение на кнопку только в случае, если конвертированные данные корректны
+        try {
+            binding.exchangeButton.setOnClickListener {
+                if (exchangedCurrencyValue != null) {
+
+                    val historyData = History(
+                        null,
+                        currentCurrency.name,
+                        inputCurrencyValue,
+                        exchangeCurrency.name,
+                        exchangedCurrencyValue!!,
+                        getCurrentDate()
+                    )
+
+                    viewModel.addHistory(historyData) {}
+
+                    Navigation.findNavController(requireView())
+                        .navigate(R.id.action_exchangeFragment_to_listFragment)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.d("MY_TAG_ERROR", e.localizedMessage)
+        }
     }
 
 
@@ -102,14 +134,33 @@ class ExchangeFragment : Fragment() {
         val conversionOneValue = exchangeCur.value / currentCurrency.value
         try {
             binding.secondCurrencyName.text = exchangeCur.name
+            inputCurrencyValue = inputValue.toDouble()
             // округляем до 5 знаков после запятой
-            binding.secondValue.text =
-                (((conversionOneValue * 100000.0).roundToInt() * inputValue.toDouble() / 100000.0)).toString()
+            exchangedCurrencyValue =
+                (((conversionOneValue * inputCurrencyValue * 100000.0).roundToInt() / 100000.0))
+            binding.secondValue.text = exchangedCurrencyValue.toString()
+
         } catch (e: Exception) {
             e.printStackTrace()
             Log.d("MY_TAG_ERROR", e.localizedMessage)
             binding.secondValue.text = "0"
+            exchangedCurrencyValue = null
+            inputCurrencyValue = 1.00
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun getCurrentDate(): String {
+
+        // текущая дата (+3 часа к той что в системе)
+        val sdf = SimpleDateFormat("dd.MM.yyyy, HH:mm")
+        val c = Calendar.getInstance()
+
+        c.add(
+            Calendar.HOUR,
+            3
+        )
+        return sdf.format(c.time)
     }
 }
 

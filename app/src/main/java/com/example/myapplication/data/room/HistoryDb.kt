@@ -9,7 +9,7 @@ import java.io.Serializable
     tableName = "History",
 )
 data class History (
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long?,
     @ColumnInfo(name ="name_currency1") val name_currency1: String,
     @ColumnInfo(name ="value_currency1") val value_currency1: Double,
     @ColumnInfo(name ="name_currency2") val name_currency2: String,

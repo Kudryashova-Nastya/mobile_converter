@@ -18,4 +18,5 @@
     <string name="historyItemExample">1 RUB</string>
     <string name="filtersHeader">Фильтры по валютам</string>
     <string name="currency">Валюты</string>
+    <string name="arrow">arrow</string>
 </resources>
