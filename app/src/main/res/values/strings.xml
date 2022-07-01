@@ -19,4 +19,8 @@
     <string name="filtersHeader">Фильтры по валютам</string>
     <string name="currency">Валюты</string>
     <string name="arrow">arrow</string>
+    <string name="radioAll">За всё время</string>
+    <string name="radioMonth">За последний месяц</string>
+    <string name="redioWeek">За последнюю неделю</string>
+    <string name="filterButton">Применить</string>
 </resources>
