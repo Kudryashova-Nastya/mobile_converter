@@ -26,8 +26,22 @@ class FilterFragment : Fragment() {
     ): View {
         binding = FragmentFilterBinding.inflate(inflater, container, false)
 
+        when (viewModel.filter.value) {
+            "За последнюю неделю" -> binding.radioButtonWeek.isChecked = true
+            "За последний месяц" -> binding.radioButtonMonth.isChecked = true
+            else -> binding.radioButtonAll.isChecked = true
+        }
+
         binding.filterButton.setOnClickListener {
-            viewModel.filter.postValue("All")
+            val selectedFilter = binding.radioButtonGroup.checkedRadioButtonId
+            val filterText = when (selectedFilter) {
+                R.id.radioButtonAll -> "За всё время"
+                R.id.radioButtonMonth -> "За последний месяц"
+                else -> "За последнюю неделю"
+            }
+            viewModel.filter.postValue(filterText)
+            Navigation.findNavController(requireView())
+                .navigate(R.id.action_filterFragment_to_historyFragment)
         }
 
         binding.buttonBack.setOnClickListener {
