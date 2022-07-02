@@ -12,12 +12,15 @@ class HistoryViewModel(private var realization: RoomCurrencyRepository) : ViewMo
         MutableLiveData()
     }
 
-    fun getHistory(): List<History>? {
+    val filter: MutableLiveData<String> by lazy {
+        MutableLiveData()
+    }
+
+    fun getHistory(): List<History> {
         return runBlocking {
             realization.getHistory()
         }
     }
-
 
 }
 

@@ -1,21 +1,25 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.myapplication.data.RoomInitRepository
 import com.example.myapplication.databinding.MainActivityBinding
+import com.example.myapplication.fragments.history.HistoryViewModel
+import com.example.myapplication.fragments.history.HistoryViewModelFactory
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
+    val viewModel: HistoryViewModel by viewModels {
+        HistoryViewModelFactory(RoomInitRepository.getRepository(this))
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +42,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         bottomNavigationView.itemIconTintList = null
 
-
-
-//        GlobalScope.launch(Dispatchers.IO) {
-//            try {
-//                val currencies = DependencyInjection.repository.getCurrencies()
-//                Log.d("MY_TAG", "$currencies")
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//                Log.d("MY_TAG", e.localizedMessage)
-//            }
-//        }
     }
 
 //    override fun onSupportNavigateUp(): Boolean {

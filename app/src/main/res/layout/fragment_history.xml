@@ -13,7 +13,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/filtersHeader"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/filterCurrency"
+        app:layout_constraintBottom_toTopOf="@+id/filterDate"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -29,7 +29,7 @@
 
 
     <TextView
-        android:id="@+id/filterCurrency"
+        android:id="@+id/filterDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
@@ -45,6 +45,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/filterCurrency" />
+        app:layout_constraintTop_toBottomOf="@+id/filterDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
