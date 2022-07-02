@@ -85,7 +85,6 @@ class RoomCurrencyRepository(
             appException.initCause(e)
             throw appException
         }
-
     }
 
 }

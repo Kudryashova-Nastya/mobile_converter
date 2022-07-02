@@ -28,7 +28,7 @@ class FilterFragment : Fragment() {
 
         when (viewModel.filter.value) {
             "За последнюю неделю" -> binding.radioButtonWeek.isChecked = true
-            "За последний месяц" -> binding.radioButtonMonth.isChecked = true
+            "В этом месяце" -> binding.radioButtonMonth.isChecked = true
             else -> binding.radioButtonAll.isChecked = true
         }
 
@@ -36,7 +36,7 @@ class FilterFragment : Fragment() {
             val selectedFilter = binding.radioButtonGroup.checkedRadioButtonId
             val filterText = when (selectedFilter) {
                 R.id.radioButtonAll -> "За всё время"
-                R.id.radioButtonMonth -> "За последний месяц"
+                R.id.radioButtonMonth -> "В этом месяце"
                 else -> "За последнюю неделю"
             }
             viewModel.filter.postValue(filterText)

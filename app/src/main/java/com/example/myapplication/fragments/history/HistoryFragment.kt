@@ -53,8 +53,14 @@ class HistoryFragment : Fragment() {
     }
 
     private fun getHistory() {
+        // определяем за какой срок брать данные
+        val historyList = when (viewModel.filter.value) {
+            "За последнюю неделю" -> viewModel.getHistory()
+            "В этом месяце" -> viewModel.getMonthHistory()
+            else -> viewModel.getHistory()
+        }
 
-        viewModel.getHistory().let { newHistory ->
+        historyList.let { newHistory ->
             historyItems = emptyList<History>().toMutableList()
             newHistory.forEach { item ->
                 historyItems.add(item)

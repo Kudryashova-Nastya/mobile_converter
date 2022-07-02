@@ -19,7 +19,7 @@
     <string name="filtersHeader">Фильтры по датам</string>
     <string name="arrow">arrow</string>
     <string name="radioAll">За всё время</string>
-    <string name="radioMonth">За последний месяц</string>
+    <string name="radioMonth">В этом месяце</string>
     <string name="redioWeek">За последнюю неделю</string>
     <string name="filterButton">Применить</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
